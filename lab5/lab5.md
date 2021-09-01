@@ -67,12 +67,53 @@ Using awk utility
 
 	d. Nothing.
 
+        #! /bin/bash
+        var=$1
+        case "$var" in
+                [A-Z] )
+                        echo "upper"
+                        ;;
+                [a-z] )
+                        echo "lower"
+                        ;;
+                [0-9] )
+                        echo "number"
+                        ;;
+                * )
+                        echo "something else"
+                        ;;
+        esac
+
+
 2. (Optional, Can be skipped)Enhanced the previous script, by checking the type of string entered by a user:
-	a. Upper Cases.
-	b. Lower Cases.
-	c. Numbers.
-	d. Mix.
-	e. Nothing.
+	
+    a. Upper Cases.
+	
+    b. Lower Cases.
+	
+    c. Numbers.
+	
+    d. Mix.
+	
+    e. Nothing.
+
+        #! /bin/bash
+        var=$1
+        case "$var" in
+                [A-Z] )
+                        echo "upper"
+                        ;;
+                [a-z] )
+                        echo "lower"
+                        ;;
+                [0-9] )
+                        echo "number"
+                        ;;
+                * )
+                        echo "something else"
+                        ;;
+        esac
+
 
 3. Write a script called mychmod using for utility to give execute permission to all files and directories in your home directory.
 
