@@ -117,11 +117,47 @@ Using awk utility
 
 3. Write a script called mychmod using for utility to give execute permission to all files and directories in your home directory.
 
+        #! /bin/bash
+
+        for entry in $(ls ~/)
+        do
+                chmod u+x ~/$entry
+        done
+
+
 4. Write a script called mybackup using for utility to create a backup of only files in your home directory.
+
+        #! /bin/bash
+
+        for entry in $(ls -la ~/ | grep '^-' | awk -F" " '{print $9}')
+        do
+                cp -v -f ~/$entry ~/backup
+        done
+
 
 5. Write a script called mymail using for utility to send a mail to all users in the system. Note: write the mail body in a file called mtemplate.
 
+    http://etutorials.org/Linux+systems/red+hat+linux+bible+fedora+enterprise+edition/Part+III+Administering+Red+Hat+Linux/Chapter+11+Setting+Up+and+Supporting+Users/Sending+Mail+to+All+Users/
+
+        # First, check for the existence of mtemplate and email subject
+
+        # Loop through every login name, but skip the first 17 accounts
+        for user in $(awk -F: '{ print $1 }' /etc/passwd | tail +17)
+            # Mail the file
+            echo Mailing to $user
+            mail -s "$subject" $user < "$(cat mtemplate)"
+
 6. Write a script called chkmail to check for new mails every 10 seconds. Note: mails are saved in /var/mail/username.
+
+        !# /bin/bash
+
+        while true
+        do
+            # check for the existance of more than one entry (the folder itself)
+            # in mail folder
+            num=$(find /var/mail/karim 2> /dev/null | wc -l)
+            if [ $num > 1 ]
+
 
 7. Create the following menu:
 	a. Press 1 to ls
