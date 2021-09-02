@@ -143,9 +143,11 @@ Using awk utility
 
         # Loop through every login name, but skip the first 17 accounts
         for user in $(awk -F: '{ print $1 }' /etc/passwd | tail +17)
+        do
             # Mail the file
             echo Mailing to $user
             mail -s "$subject" $user < "$(cat mtemplate)"
+        done
 
 6. Write a script called chkmail to check for new mails every 10 seconds. Note: mails are saved in /var/mail/username.
 
@@ -153,10 +155,13 @@ Using awk utility
 
         while true
         do
+            sleep 10
             # check for the existance of more than one entry (the folder itself)
             # in mail folder
             num=$(find /var/mail/karim 2> /dev/null | wc -l)
-            if [ $num > 1 ]
+            if [ $num -gt 1 ]; then
+                echo "You've got mail"
+            fi
 
 
 7. Create the following menu:
