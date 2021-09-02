@@ -222,6 +222,57 @@ Using awk utility
         
 8. Write a script called myarr that ask a user how many elements he wants to enter in an array, fill the array and then print it.
 
+        #! /bin/bash
+
+        # To use +()
+        shopt -s extglob
+
+        echo "How many elements do you want to enter?"
+        read num
+
+        case $num in
+                +([0-9]) )
+                        let i=0
+                        echo "Enter elements:"
+                        while [ $i -lt $num ]
+                        do
+                                read var
+                                myarr[$i]=$var
+                                let "i=i+1"
+                        done
+                        echo "You entered:"
+                        echo "${myarr[@]}"
+                        ;;
+                * )
+                        echo "Please enter a number"
+                        ;;
+        esac
+
+
+
 9. Write a script called myavg that calculate average of all numbers entered by a user. Note: use arrays
 
+        #! /bin/bash
+
+        shopt -s extglob
+
+        numArgs=$#
+
+        let sum=0
+
+        for num in "$@"
+        do      
+                case $num in
+                        +([0-9]) )
+                                let "sum=num+sum"
+                                ;;
+                        * )
+                                echo "You must only enter numbers!"
+                                exit
+                esac
+        done    
+
+        let "avg=sum/numArgs"
+
+        echo "Average = $avg"
 
