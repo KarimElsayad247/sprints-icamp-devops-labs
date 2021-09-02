@@ -165,12 +165,63 @@ Using awk utility
 
 
 7. Create the following menu:
-	a. Press 1 to ls
-	b. Press 2 to ls –a
-	c. Press 3 to exit
-Using select utility then while utility.
+	
+    a. Press 1 to ls
+	
+    b. Press 2 to ls –a
+	
+    c. Press 3 to exit
 
+    Using select utility then while utility.
+    
+    - With select:
+
+            #! /bin/bash
+
+            select choice in "ls" "ls -a" "exit"
+            do      
+                    case $choice in
+                            "ls" )
+                                    ls
+                                    ;;
+                            "ls -a" )
+                                    ls -a
+                                    ;;
+                            "exit" )
+                                    break
+                                    ;;
+                    esac            
+            done 
+
+    - With While:
+
+            #! /bin/bash
+
+            while true
+            do
+                    echo "1) ls"
+                    echo "2) ls -a"
+                    echo "3) exit"
+                    
+                    read choice
+                    
+                    case $choice in
+                            1 )
+                                    ls
+                                    ;;
+                            2 )     
+                                    ls -a
+                                    ;;
+                            3 )     
+                                    break
+                                    ;;
+                            * )
+                                    echo "Choose 1-3"
+                    esac 
+            done 
+        
 8. Write a script called myarr that ask a user how many elements he wants to enter in an array, fill the array and then print it.
 
 9. Write a script called myavg that calculate average of all numbers entered by a user. Note: use arrays
+
 
